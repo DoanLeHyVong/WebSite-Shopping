@@ -1,0 +1,65 @@
+﻿.home {
+    padding: 0;
+    position: relative;
+}
+
+    .home .slide-container .slide {
+        min-height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        align-items: center;
+        padding: 0 9%;
+        padding-top: 9rem;
+        flex: 1 1 40rem;
+        animation: slideContent 0.5s linear 1s backwards;
+    }
+
+        .home .slide-container .slide .image {
+            flex: 1 1 50rem;
+            padding-bottom: 15rem;
+            position: relative;
+            z-index: 0;
+        }
+
+        .home .slide-container .slide .image {
+            flex: 1 1 50rem;
+            padding-bottom: 15rem;
+            position: relative;
+            z-index: 0;
+        }
+
+        .home .slide-container .slide .image {
+            flex: 1 1 50rem;
+            padding-bottom: 15rem;
+            position: relative;
+            z-index: 0;
+        }
+
+home .slide-container .slide .image .shoe {
+    width: 100%;
+    transform: rotate(-35deg);
+    animation: shoe 0.3s linear;
+}
+
+.home .slide-container .slide .image .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    animation: shoeText 0.5s linear 0.5s backwards;
+}
+
+.home .slide-container:nth-child(1) .slide {
+    background: url(/HinhanhSP/banner123.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.home .slide-container {
+    display: none;
+}
+
+    .home .slide-container.active {
+        display: block;
+    }

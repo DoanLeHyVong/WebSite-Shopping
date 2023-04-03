@@ -43,6 +43,8 @@ namespace Ictshop.Areas.Admin.Controllers
             return View();
         }
 
+
+        // xác nhận đơn hàng và lưu vào database số lượng tồn  - số lượng đã đặt
         public ActionResult Xacnhan(int? id)
         {
             if (id == null)
@@ -50,11 +52,21 @@ namespace Ictshop.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Donhang donhang = db.Donhangs.Find(id);
-            donhang.Tinhtrang = 1;
-            db.SaveChanges();
+            
             if (donhang == null)
             {
                 return HttpNotFound();
+            }
+            donhang.Tinhtrang = 1;
+            db.SaveChanges();
+
+            var chitietdonhang = db.Chitietdonhangs.Where(x => x.Madon == id).ToList();
+            foreach (var ctdh in chitietdonhang)
+            {
+                // update so luong
+                Sanpham sp = db.Sanphams.FirstOrDefault(x => x.Masp == ctdh.Masp);
+                sp.Soluong = sp.Soluong - ctdh.Soluong;
+                db.SaveChanges();
             }
             return RedirectToAction("Index");
         }

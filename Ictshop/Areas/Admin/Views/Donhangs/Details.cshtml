@@ -11,12 +11,13 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nguoidung.Hoten)
+            Họ Tên
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Nguoidung.Hoten)
         </dd>
+
 
         <dt>
             @Html.DisplayNameFor(model => model.Ngaydat)
@@ -27,7 +28,6 @@
         </dd>
 
         <dt>
-            @*@Html.DisplayNameFor(model => model.Tinhtrang)*@
             Tình trạng đơn hàng
         </dt>
 
@@ -64,7 +64,7 @@
                 }
                 else if (Model.Thanhtoan == 2)
                 {
-                    <div style="color:slateblue">Thanh toán chuyển khoản</div>
+                    <div style="color:slateblue">Thanh toán quét mã Momo</div>
 
                 }
             }
@@ -76,6 +76,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Diachinhanhang)
+        </dd>
+
+        <dt>
+            Tổng tiền
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tongtien)
         </dd>
 
     </dl>

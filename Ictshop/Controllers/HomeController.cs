@@ -29,10 +29,5 @@ namespace Ictshop.Controllers
 
             return View();
         }
-        public ActionResult SlidePartial()
-        {
-            return PartialView();
-
-        }
     }
 }

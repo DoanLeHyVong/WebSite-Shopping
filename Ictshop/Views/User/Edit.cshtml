@@ -2,6 +2,8 @@
 <script src="~/Content/ckeditor/ckeditor.js"></script>
 <script src="~/Content/ckfinder/ckfinder.js"></script>
 <script src="~/Scripts/jquery-3.4.1.slim.js"></script>
+
+<link rel="stylesheet" href="~/css/Style.css";
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,6 +16,16 @@
 
 <div class="form-horizontal">
     <h2>Chỉnh sửa hồ sơ cá nhân</h2>
+    <section class="home" id="home">
+        <div class="slide-container active">
+            <div class="slide">
+                <div class="image">
+                    <img src="~/HinhanhSP/banner124.jpg" class="shoe" alt="" />
+                    <img src="~/HinhanhSP/banner125.jpg" class="text" alt="" />
+                </div>
+            </div>
+        </div>
+    </section>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.MaNguoiDung)
@@ -59,7 +71,7 @@
         </div>
     </div>
 
-   
+
 
     <div class="form-group">
         @Html.LabelFor(model => model.Diachi, htmlAttributes: new { @class = "control-label col-md-2" })

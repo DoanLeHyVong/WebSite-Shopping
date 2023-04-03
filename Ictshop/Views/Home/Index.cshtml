@@ -4,24 +4,42 @@
 }
 
 
+<link rel="stylesheet" href="~/css/Style.css";
+
+
 <br />
-<div class="row">
+<section class="home" id="home">
+    <div class="slide-container active">
+        <div class="slide">
+            <div class="image">
+                <img src="~/HinhanhSP/banner124.jpg" class="shoe" alt="" />
+                <img src="~/HinhanhSP/banner125.jpg" class="text" alt="" />
+            </div>
+        </div>
+    </div>
+</section>
+@*<div class="row">
+    <div class="item">
+        <img src="~/HinhanhSP/banner-bg.jpg" class="img-responsive" alt="" />
+    </div>
     <div class="col-md-8">
-        @Html.Action("SlidePartial", "Home")
+        <img class="img-responsive" src="~/HinhanhSP/banner-img.png" />
     </div>
-    <div class="col-md-4">
-        <img src="~/HinhanhSP/qc3.jpg" class="img-responsive" alt="" />
+    <div class="item">
+        <img class="img-responsive" src="~/HinhanhSP/common-banner.jpg" />
     </div>
-</div>
-<div>
-    <img class="img-responsive" src="~/HinhanhSP/ban1.png" />
-</div>
+
+</div>*@
+
+
+
 <br />
 <div class="spnoibat">
     <div class="row">
 
         <h3> SẢN PHẨM NỔI BẬT</h3>
-        <div class="col-md-4">
+        <img class="img-responsive" src="~/HinhanhSP/ban1.png" />
+        @*<div class="col-md-4">
             <img src="~/HinhanhSP/spnb1.jpg" class="img-responsive" alt="" />
         </div>
         <div class="col-md-4">
@@ -29,7 +47,7 @@
         </div>
         <div class="col-md-4">
             <img src="~/HinhanhSP/spnb3.jpg" class="img-responsive" alt="" />
-        </div>
+        </div>*@
     </div>
 </div>
 <div class="danhmuc">

@@ -165,7 +165,7 @@ namespace Ictshop.Controllers
         public ActionResult DatHang(FormCollection donhangForm)
         {
             //Kiểm tra đăng đăng nhập
-            if (Session["use"] == null || Session["use"].ToString() == "")
+            if (Session["UserId"] == null || Session["UserId"].ToString() == "")
             {
                 return RedirectToAction("Dangnhap", "User");
             }
@@ -176,12 +176,16 @@ namespace Ictshop.Controllers
             }
             Console.WriteLine(donhangForm);
             string diachinhanhang = donhangForm["Diachinhanhang"].ToString();
+            Session["diachinhanhang"] = diachinhanhang;
             string thanhtoan = donhangForm["MaTT"].ToString();
             int ptthanhtoan = Int32.Parse(thanhtoan);
-
+            if(ptthanhtoan == 2)
+            {
+                return RedirectToAction("Momo", "GioHang");
+            }
             //Thêm đơn hàng
             Donhang ddh = new Donhang();
-            Nguoidung kh = (Nguoidung)Session["use"];
+            Nguoidung kh = (Nguoidung)Session["UserId"];
             List<GioHang> gh = LayGioHang();
             ddh.MaNguoidung = kh.MaNguoiDung;
             ddh.Ngaydat = DateTime.Now;
@@ -200,17 +204,18 @@ namespace Ictshop.Controllers
             foreach (var item in gh)
             {
                 Chitietdonhang ctDH = new Chitietdonhang();
-                decimal thanhtien =  item.iSoLuong * (decimal) item.dDonGia;
+                decimal thanhtien = item.iSoLuong * (decimal)item.dDonGia;
                 ctDH.Madon = ddh.Madon;
                 ctDH.Masp = item.iMasp;
                 ctDH.Soluong = item.iSoLuong;
                 ctDH.Dongia = (decimal)item.dDonGia;
-                ctDH.Thanhtien = (decimal) thanhtien;
+                ctDH.Thanhtien = (decimal)thanhtien;
                 ctDH.Phuongthucthanhtoan = 1;
                 db.Chitietdonhangs.Add(ctDH);
             }
             db.SaveChanges();
             return RedirectToAction("Index", "Donhangs");
+
         }
         #endregion
 
@@ -224,7 +229,7 @@ namespace Ictshop.Controllers
             ViewBag.MaNguoiDung = new SelectList(db.Nguoidungs, "MaNguoiDung", "Hoten");
 
             //Kiểm tra đăng đăng nhập
-            if (Session["use"] == null || Session["use"].ToString() == "")
+            if (Session["UserId"] == null || Session["UserId"].ToString() == "")
             {
                 return RedirectToAction("Dangnhap", "User");
             }
@@ -233,9 +238,10 @@ namespace Ictshop.Controllers
             {
                 RedirectToAction("Index", "Home");
             }
+            
             //Thêm đơn hàng
             Donhang ddh = new Donhang();
-            Nguoidung kh = (Nguoidung)Session["use"];
+            Nguoidung kh = (Nguoidung)Session["UserId"];
             List<GioHang> gh = LayGioHang();
             decimal tongtien = 0;
             foreach (var item in gh)
@@ -249,7 +255,7 @@ namespace Ictshop.Controllers
             Chitietdonhang ctDH = new Chitietdonhang();
             ViewBag.tongtien = tongtien;
             return View(ddh);
-
+            db.SaveChanges();
         }
         public ActionResult Momo()
         {
@@ -266,7 +272,7 @@ namespace Ictshop.Controllers
             string accessKey = "iPXneGmrJH0G8FOP";
             string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
             string orderInfo = "test";
-            string returnUrl = "https://localhost:44394/GioHang/Thanhtoanmomo";
+            string returnUrl = "https://localhost:44322/GioHang/Thanhtoanmomo";
             string notifyurl = "https://4c8d-2001-ee0-5045-50-58c1-b2ec-3123-740d.ap.ngrok.io/GioHang/LuuThanhToan"; 
 
             string amount = tongtien.ToString();
@@ -315,6 +321,37 @@ namespace Ictshop.Controllers
         }
         public ActionResult Thanhtoanmomo(Result result)
         {
+            Donhang ddh = new Donhang();
+            Nguoidung kh = (Nguoidung)Session["UserId"];
+            List<GioHang> gh = LayGioHang();
+            ddh.MaNguoidung = kh.MaNguoiDung;
+            ddh.Ngaydat = DateTime.Now;
+            ddh.Thanhtoan = 2;
+            ddh.Diachinhanhang = Session["diachinhanhang"].ToString();
+            decimal tongtien = 0;
+            foreach (var item in gh)
+            {
+                decimal thanhtien = item.iSoLuong * (decimal)item.dDonGia;
+                tongtien += thanhtien;
+            }
+            ddh.Tongtien = tongtien;
+            db.Donhangs.Add(ddh);
+            db.SaveChanges();
+            //Thêm chi tiết đơn hàng
+            foreach (var item in gh)
+            {
+                Chitietdonhang ctDH = new Chitietdonhang();
+                decimal thanhtien = item.iSoLuong * (decimal)item.dDonGia;
+                ctDH.Madon = ddh.Madon;
+                ctDH.Masp = item.iMasp;
+                ctDH.Soluong = item.iSoLuong;
+                ctDH.Dongia = (decimal)item.dDonGia;
+                ctDH.Thanhtien = (decimal)thanhtien;
+                ctDH.Phuongthucthanhtoan = 1;
+                db.Chitietdonhangs.Add(ctDH);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index", "Donhangs");
             string rMessage = result.message;
             string rOrderId = result.orderId;
             string rErrorCode = result.errorCode;

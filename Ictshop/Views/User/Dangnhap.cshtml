@@ -1,37 +1,51 @@
 ﻿@model Ictshop.Models.LoginModel
 
 @{ ViewBag.Title = "Dangnhap";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
-
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+    <link rel="stylesheet" href="~/css/Style.css";
 <h2>Hãy đăng nhập để sử dụng đầy đủ tính năng của Website</h2>
+<section class="home" id="home">
+    <div class="slide-container active">
+        <div class="slide">
+            <div class="image">
+                <img src="~/HinhanhSP/banner124.jpg" class="shoe" alt="" />
+                <img src="~/HinhanhSP/banner125.jpg" class="text" alt="" />
+            </div>
+        </div>
+    </div>
+</section>
+
 <br />
 
-<h3 class="text-danger">@ViewBag.Fail</h3>
 
+<h3>Đăng nhập</h3>
+<h3 class="text-danger">@ViewBag.Fail</h3>
 @using (Html.BeginForm("Dangnhap", "User", FormMethod.Post))
 {
-@Html.AntiForgeryToken()
-                <div class="form-horizontal">
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.userMail, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.userMail, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.userMail, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { type = "Password", @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.userMail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.userMail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.userMail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { type = "Password", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Đăng nhập" class="btn btn-primary" />
-                        </div>
-                    </div>
-                </div>}
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+

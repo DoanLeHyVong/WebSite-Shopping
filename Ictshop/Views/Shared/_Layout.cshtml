@@ -68,6 +68,63 @@
 
         .giohang {
             color: white;
+            font-size: 15px;
+        }
+        .nav-link:hover {
+            opacity: 0.5;
+            color: black    ;
+        }
+
+        .container body-content {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            display: flex;
+        }
+        .cot {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+        .col-lg-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+        .col-lg-8 {
+            flex: 0 0 66.666667%;
+            max-width: 66.666667%;
+        }
+        .col-lg-8 .col-md-12{
+            display: flex;
+        }
+        .col-md-8 .col-md-4 {
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .single-deal {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .justify-content-center {
+            justify-content: center !important;
+        }
+        .single-deal .overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            content: "";
+            background: #000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease 0s;
         }
     </style>
 
@@ -83,90 +140,116 @@
 
         <div class="top_header col-md-12">
 
-            <div class="row">
-                <div class="col-sm-4 col-md-0" style="font-size:large">Shopping</div>
-
-                <div class="col-sm-4 col-md-0" style="padding-left:250px">
-                    @Html.Action("GioHangPartial", "GioHang", new { @class = "giohang" })
-                </div>
-                @{ if (u != null)
-                    {
-                        <div class="col-sm-4 col-md-0">
-                            <a style="color:white" href="@Url.Action("Profile", "User", new { id = u.MaNguoiDung  })"> Xin chào : @u.Email</a>
-                            &nbsp;
-                            <a style="color:red" href="/User/DangXuat"> ĐĂNG XUẤT</a>
-                        </div> }
-                    else
-                    {
-                        <div class="col-sm-4 col-md-0">
-                            <a style="color:white" href="/User/Dangky"> Đăng ký</a>
-                            &nbsp;
-                            <a style="color:white" href="/User/Dangnhap"> Đăng nhập</a>
-                        </div> } }
-
-
-            </div>
 
         </div>
-        <div class="container">
+        <div class="container" style="display: flex;align-items: center; justify-content: space-between; padding: 9px 0px">
 
-            <div class="navbar-header">
+            <div class="navbar-header" style="display: flex; gap:5px">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img class="navbar-brand" src="~/HinhanhSP/logo1.png" width="50" height="50" style="padding:0" />
-                @Html.ActionLink(" ShoeShop ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <form class="form-inline" style="float:left">
-                    <form method="get" action="@Url.Action("TimKiemSanPham", "SanPham")">
-                        <input type="text" name="q" placeholder="Tìm kiếm sản phẩm...">
+                <img class="navbar-brand" src="~/HinhanhSP/fav.png" width="50" height="50" style="padding:0" />
+            </div>
+
+            <div class="navbar-collapse collapse">
+
+                <form class="form-inline" style="float:left; margin-right: 50px">
+                    <form method="get" action="@Url.Action("TimKiemSanPham", "Sanpham")">
+                        <input type="text" name="q" placeholder="Tìm kiếm sản phẩm..." style="border-radius : 5px">
                         <button type="submit">Tìm kiếm</button>
                     </form>
                 </form>
-
-            </div>
-
-            <div class="navbar-collapse collapse">lll
-
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/Home/Index" title="giay">
-
-                            <span>GIÀY</span>
-
+                        <a href="/Home/Index" title="giay" style="font-size: 15px; color:#000">
+                            <span>HOME</span>
                         </a>
-
                     </li>
                     <li>
-                        <a href="/Home/Contact" title="LIENHE">
+                        <a href="/Home/Contact" title="LIENHE" style="font-size: 15px; color: #000">
                             <span>LIÊN HỆ</span>
-
                         </a>
                     </li>
                     <li>
-                        <a style="color:white"
-                           class="nav-link"
-                           href="@Url.Action("Index", "DonHangs")">ĐƠN HÀNG</a>
+                        <a style="font-size: 15px; color: #000" class="nav-link" href="@Url.Action("Index", "DonHangs")">ĐƠN HÀNG</a>
+                    </li>
+
+                    <li>
+                        @Html.Action("GioHangPartial", "GioHang", new { @class = "giohang" })
+                    </li>
+
+                    <li style="display: flex">
+                        @{ if (u != null)
+                            {
+                                <a style="font-size: 15px" href="@Url.Action("Profile", "User", new { id = u.MaNguoiDung })"> Xin chào : @u.Hoten</a>
+                                <a style="color:red; font-size: 15px" href="/User/DangXuat"> ĐĂNG XUẤT</a>
+                            }
+                            else
+                            {
+                                <a style="font-size: 15px; color: #000" href="/User/Dangnhap"> ĐĂNG NHẬP</a>
+                                <a style="font-size: 15px; color: #000" href="/User/Dangky"> ĐĂNG KÝ</a>
+                            }
+                        }
                     </li>
                 </ul>
             </div>
-
         </div>
     </div>
-
-
     <br>
-    <div class=" row">
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <div>
-                <img class="img-responsive" src="~/HinhanhSP/ban2.png" />
+
+    <section class="category-area">
+        <div class="container">
+            @RenderBody();
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-12">
+                    <div class="cot">
+                        <div class="col-lg-8 col-md-8">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100"
+                                     src="~/HinhanhSP/c1.jpg"
+                                     alt="" />                               
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100"
+                                     src="~/HinhanhSP/c2.jpg"
+                                     alt="" />                               
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100"
+                                     src="~/HinhanhSP/c3.jpg"
+                                     alt="" />                              
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100 " style="margin-left : 60px"
+                                     src="~/HinhanhSP/c4.jpg"
+                                     alt="" />                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-deal">
+                        <div class="overlay"></div>
+                        <img class="img-fluid w-100" style="margin-left:40px" src="~/HinhanhSP/c5.jpg" alt="" />                      
+                        </a>
+                    </div>
+                </div>
             </div>
-            <br />
         </div>
-    </div>
+    </section>
+
     <footer class="bg-info" style="padding-left:50px">
         <div class="row">
             <div class="col-md-3 col-sm-6">
@@ -216,7 +299,7 @@
         <hr />
         <center> <p class="bg-primary">&copy; @DateTime.Now.Year - Shopping</p></center>
     </footer>
-    
+
 
 
 

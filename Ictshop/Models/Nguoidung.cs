@@ -1,4 +1,4 @@
-namespace Ictshop.Models
+﻿namespace Ictshop.Models
 {
     using System;
     using System.Collections.Generic;

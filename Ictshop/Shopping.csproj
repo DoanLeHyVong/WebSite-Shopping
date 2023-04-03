@@ -1220,10 +1220,16 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Slide.css" />
     <Content Include="Content\Style.css" />
+    <Content Include="css\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="HinhanhSP\1.png" />
+    <Content Include="HinhanhSP\2.png" />
+    <Content Include="HinhanhSP\3.png" />
+    <Content Include="HinhanhSP\4.png" />
+    <Content Include="HinhanhSP\5.png" />
     <Content Include="HinhanhSP\adidas1.jpg" />
     <Content Include="HinhanhSP\adidas2.jpg" />
     <Content Include="HinhanhSP\adidas3.jpg" />
@@ -1232,8 +1238,16 @@
     <Content Include="HinhanhSP\avt3.jpg" />
     <Content Include="HinhanhSP\avt4.jpg" />
     <Content Include="HinhanhSP\ban1.png" />
-    <Content Include="HinhanhSP\ban2.png" />
-    <Content Include="HinhanhSP\banner.jpg" />
+    <Content Include="HinhanhSP\banner123.jpg" />
+    <Content Include="HinhanhSP\banner124.jpg" />
+    <Content Include="HinhanhSP\banner125.jpg" />
+    <Content Include="HinhanhSP\c1.jpg" />
+    <Content Include="HinhanhSP\c2.jpg" />
+    <Content Include="HinhanhSP\c3.jpg" />
+    <Content Include="HinhanhSP\c4.jpg" />
+    <Content Include="HinhanhSP\c5.jpg" />
+    <Content Include="HinhanhSP\fav.png" />
+    <Content Include="HinhanhSP\logo.png" />
     <Content Include="HinhanhSP\logo1.png" />
     <Content Include="HinhanhSP\nike1.jpg" />
     <Content Include="HinhanhSP\nike2.jpg" />
@@ -1444,6 +1458,7 @@
     <Content Include="Views\Sanpham\giaypuma.cshtml" />
     <Content Include="Views\Sanpham\giaynike.cshtml" />
     <Content Include="Views\GioHang\Thanhtoanmomo.cshtml" />
+    <Content Include="Views\Sanpham\TimKiemSanPham.cshtml" />
     <None Include="Web.Debug.Config">
       <DependentUpon>Web.Config</DependentUpon>
     </None>
