@@ -37,10 +37,10 @@ namespace Ictshop.Controllers
             }
             return View(chitiet);
         }
+        
         public ActionResult TimKiemSanPham(string q)
         {
             var sanPhams = db.Sanphams.Where(sp => sp.Tensp.Contains(q)).ToList();
-
             return View(sanPhams);
         }
 

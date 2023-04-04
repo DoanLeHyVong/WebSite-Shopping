@@ -23,6 +23,7 @@
 <body class="sb-nav-fixed">
     @{ var u = Session["UserId"] as Ictshop.Models.Nguoidung; }
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-success">
+       
         <h3>@Html.ActionLink("Shopping Admin", "Index", "Admin", new { @class = "menu1" })</h3>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
@@ -46,6 +47,7 @@
                     <a class="dropdown-item" style="color:red" href="@Url.Action("Details", "Nguoidungs", new { id = u.MaNguoiDung  })"> Xin chào : @u.Email</a>
 
                     <div class="dropdown-divider"></div>
+                    
                     <a class="dropdown-item" href="/User/DangXuat"> ĐĂNG XUẤT</a>
                 </div>
             </li>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Ictshop.Models;
@@ -11,6 +12,19 @@ namespace Ictshop.Controllers
     public class UserController : Controller
     {
         ShopShoe db = new ShopShoe();
+
+        public static bool ValidateVNPhoneNumber(string phoneNumber)
+        {
+            phoneNumber = phoneNumber.Replace("+84", "0");
+            Regex regex = new
+            Regex(@"^(0)(86|96|97|98|32|33|34|35|36|37|38|39|91|94|83|84|85|81|82|90|93|70|79|77|76|78|92|56|58|99|59|55|87)\d{7}$");
+            return regex.IsMatch(phoneNumber);
+        }
+        public bool ValidateEmail(string email)
+        {
+            Regex regex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            return regex.IsMatch(email);
+        }
         // ĐĂNG KÝ
         public ActionResult Dangky()
         {
@@ -59,7 +73,13 @@ namespace Ictshop.Controllers
                 {
                     ViewBag.errorPass = "Mật khẩu phải có ít nhất một ký tự đặc biệt";
                     return View(nguoidung);
-                }
+                }else if (ValidateVNPhoneNumber(nguoidung.Dienthoai) == false)
+                {
+                    ViewBag.sdt = "Số điện thoại không phù hợp";
+                }else if (ValidateEmail(nguoidung.Email) == false)
+                {
+                    ViewBag.email = "Email không hợp lệ";
+                } 
                 else
                 {
                     db.SaveChanges();
@@ -67,27 +87,7 @@ namespace Ictshop.Controllers
                     ViewBag.isReg = true;
                     return View("Dangky");
                 }
-                return View(nguoidung);
-                
-
-                //if (!ModelState.IsValid)
-                //{
-                //    return View(nguoidung);
-                //}
-
-
-                //// Lưu lại vào cơ sở dữ liệu             
-                //// Nếu dữ liệu đúng thì trả về trang đăng nhập
-                //if (ModelState.IsValid)
-                //{
-
-
-                //}
-                //else
-                //{
-                //    return View("Dangky");
-                //}
-
+                return View(nguoidung);                            
             }
             catch(Exception ex)
             {
@@ -112,15 +112,17 @@ namespace Ictshop.Controllers
                 if (user != null)
                 {
                     Session["UserId"] = user.IDQuyen;
-                    if (user.IDQuyen != 2)
+                    if (user.IDQuyen == 2)
                     {
                         Session["UserId"] = user;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Admin/Home");
+
                     }
                     else
                     {
                         Session["UserId"] = user;
-                        return RedirectToAction("Index", "Admin/Home");
+                        return RedirectToAction("Index", "Home");
+
                     }
                 }
                 else
