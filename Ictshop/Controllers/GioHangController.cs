@@ -238,7 +238,7 @@ namespace Ictshop.Controllers
             {
                 RedirectToAction("Index", "Home");
             }
-            
+
             //Thêm đơn hàng
             Donhang ddh = new Donhang();
             Nguoidung kh = (Nguoidung)Session["UserId"];
@@ -249,13 +249,13 @@ namespace Ictshop.Controllers
                 decimal thanhtien = item.iSoLuong * (decimal)item.dDonGia;
                 tongtien += thanhtien;
             }
-
             ddh.MaNguoidung = kh.MaNguoiDung;
             ddh.Ngaydat = DateTime.Now;
             Chitietdonhang ctDH = new Chitietdonhang();
             ViewBag.tongtien = tongtien;
             return View(ddh);
             db.SaveChanges();
+
         }
         public ActionResult Momo()
         {

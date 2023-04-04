@@ -116,14 +116,13 @@ namespace Ictshop.Controllers
                     {
                         Session["UserId"] = user;
                         return RedirectToAction("Index", "Admin/Home");
-
                     }
                     else
                     {
                         Session["UserId"] = user;
                         return RedirectToAction("Index", "Home");
-
                     }
+
                 }
                 else
                 {

@@ -11,15 +11,9 @@ namespace Ictshop.Controllers
     public class HomeController : Controller
     {
         ShopShoe db = new ShopShoe();
-        public ActionResult Index(int ? page )
+        public ActionResult Index()
         {
-
-            if (page == null) page = 1;
-            var giay = (from s in db.Sanphams select s).OrderBy(m => m.Tensp);
-            int pageSize = 2;
-            int pageNum = page ?? 1;
-            return View(giay.ToPagedList(pageNum, pageSize));
-
+            return View();
         }
 
         public ActionResult About()

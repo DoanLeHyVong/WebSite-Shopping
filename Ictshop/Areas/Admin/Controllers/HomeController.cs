@@ -12,29 +12,36 @@ namespace Ictshop.Areas.Admin.Controllers
         
     {
         ShopShoe db = new ShopShoe();
-       
+
         // GET: Admin/Home
-        
+
+        //public ActionResult Index()
+        //{
+        //    if (Session["UserId"] != null)
+        //    {
+        //        var user = (Nguoidung)Session["UserId"];
+        //        if (user.IDQuyen == 2) // kiểm tra xem người dùng có quyền admin không
+        //        {
+        //            return View(); // hiển thị trang admin
+        //        }
+        //        return RedirectToAction("Error", "Home");
+        //    }
+        //}
         public ActionResult Index(int ?page)
         {
-            // 1. Tham số int? dùng để thể hiện null và kiểu int( số nguyên)
-            // page có thể có giá trị là null ( rỗng) và kiểu int.
+            if (Session["UserId"] != null)
+            {
+                var user = (Nguoidung)Session["UserId"];
+                if (user.IDQuyen != 2) 
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
 
-            // 2. Nếu page = null thì đặt lại là 1.
             if (page == null) page = 1;
-
-            // 3. Tạo truy vấn sql, lưu ý phải sắp xếp theo trường nào đó, ví dụ OrderBy
-            // theo Masp mới có thể phân trang.
             var sp = db.Sanphams.OrderBy(x => x.Masp);
-
-            // 4. Tạo kích thước trang (pageSize) hay là số sản phẩm hiển thị trên 1 trang
             int pageSize = 5;
-
-            // 4.1 Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
-            // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
             int pageNumber = (page ?? 1);
-
-            // 5. Trả về các sản phẩm được phân trang theo kích thước và số trang.
             return View(sp.ToPagedList(pageNumber, pageSize));
 
         }
