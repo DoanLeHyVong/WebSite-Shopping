@@ -157,7 +157,7 @@
 
                 <form class="form-inline" style="float:left; margin-right: 50px">
                     <form method="get" action="@Url.Action("TimKiemSanPham", "Sanpham")">
-                        <input type="text" name="q" placeholder="Tìm kiếm sản phẩm..." style="border-radius : 5px">
+                        <input type="text" name="q" value="@ViewBag.Keyword" placeholder="Tìm kiếm sản phẩm..." style="border-radius : 5px">
                         <button type="submit">Tìm kiếm</button>
                     </form>
                 </form>

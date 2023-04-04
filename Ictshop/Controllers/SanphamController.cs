@@ -43,6 +43,14 @@ namespace Ictshop.Controllers
             var sanPhams = db.Sanphams.Where(sp => sp.Tensp.Contains(q)).ToList();
             return View(sanPhams);
         }
+        //public ActionResult TimKiemSanPham(string q)
+        //{
+        //    if(q != null)
+        //    {
+        //        ViewBag.Keyword = q;
+        //        return View(TimKiemSanPham(q).ToPagedList);
+        //    }
+        //}
 
     }
 
