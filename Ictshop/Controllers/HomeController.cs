@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ictshop.Models;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,11 +10,15 @@ namespace Ictshop.Controllers
 {
     public class HomeController : Controller
     {
-      
-        public ActionResult Index()
+        ShopShoe db = new ShopShoe();
+        public ActionResult Index(int ? page )
         {
-       
-            return View();
+
+            if (page == null) page = 1;
+            var giay = (from s in db.Sanphams select s).OrderBy(m => m.Tensp);
+            int pageSize = 2;
+            int pageNum = page ?? 1;
+            return View(giay.ToPagedList(pageNum, pageSize));
 
         }
 

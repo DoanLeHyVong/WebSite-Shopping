@@ -45,7 +45,7 @@ namespace Ictshop.Controllers
         }
         //public ActionResult TimKiemSanPham(string q)
         //{
-        //    if(q != null)
+        //    if (q != null)
         //    {
         //        ViewBag.Keyword = q;
         //        return View(TimKiemSanPham(q).ToPagedList);
